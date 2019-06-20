@@ -9,10 +9,12 @@ sizeY = 480
 def exit():
     sys.exit()
 
+#forget object placement
 def forget(list):
     for i in list:
         i.place_forget()
 
+#place objects into frame
 def place(list1, list2):
     j = 0
     if((len(list2) / len(list1)) == 2):
@@ -24,32 +26,37 @@ def place(list1, list2):
             i.place(x=list2[j], y=list2[j+1], width=list2[j+2])
             j+=3
 
+#translate rgb colour to hex
 def translate(rgb):
     return "#%02x%02x%02x" % rgb
 
+#samsung menu
 def Samsung():
     forget(menuList)
     place(samsungList, samsungListCoord)
 
+#led menu
 def Led():
     forget(menuList)
     forget(coloursList)
     forget(effectsList)
     place(ledList, ledListCoord)
-    #color =askcolor()
 
+#colour pick menu
 def Colours():
     forget(ledList)
     place(coloursList, coloursListCoord)
 
+#update frame to show colour
 def updateColour(s):
     colourFrame.configure(bg= translate((colourR.get(), colourG.get(), colourB.get())))
 
+#effects menu
 def Effects():
     forget(ledList)
     place(effectsList, effectsListCoord)
-    
 
+#main menu
 def menu():
     forget(samsungList)
     forget(ledList)
@@ -60,6 +67,7 @@ root = Tk()
 root.geometry(str(sizeX) + "x" + str(sizeY))
 root.configure(bg="black")
 title = Frame(root).place(width = sizeX, height = 150, x = 0, y = 0)
+version = Frame(root).place(width = sizeX, height = sizeY, x = 0, y = 0)
 main = Frame(root).place(width = sizeX, height = 650, x = 0, y = 200)
 bg1 = PhotoImage(file="images/bg1.png")
 background_label = Label(main, image=bg1)
@@ -74,7 +82,8 @@ rgbImg = PhotoImage(file="images\\rgbImg2.png")
 rgbPic = Label(root, image=rgbImg)
 
 #Labels
-title = Label(title, text="IR Controller v1.1", bg="#ff0c85", fg="#ffc9e3", font=("Arial", 44))
+title = Label(title, text="IR Controller", bg="#ff0c85", fg="#ffc9e3", font=("Arial", 44))
+version = Label(version, text="v1.1", bg="#ff0c85", fg="#ffc9e3", font=("Arial", 20))
 
 #----Menu------------------------------------------------------------------------------------------------------------
 LedB = Button(main, text="LED", bg="white", fg="black", font=("Arial", 20), command=Led)
@@ -84,8 +93,8 @@ PowerB = Button(image=pwr, command=exit)
 PowerB["bg"] = "black"
 PowerB["border"] = "0"
 
-menuList = [title, LedB, SamsungB]
-menuListCoord = [150,0,500 , 100,240,200 , 500,240,200]
+menuList = [title, version, LedB, SamsungB]
+menuListCoord = [175,0,450 , 720,440,80 , 100,240,200 , 500,240,200]
 
 #----Universal------------------------------------------------------------------------------------------------------------
 backBtn = Button(main, text="BACK", bg="black", fg="white", font=("Arial", 20), command=menu)
@@ -120,9 +129,10 @@ colourB = Scale(main, bg="#3553ce", fg="white", from_=255, to=0, showvalue=0, fo
 colourB.set(255)
 colourBlackFrame = Frame(root, width=110, height=110, bg="#52565e")
 colourFrame = Frame(root, width=100, height=100, bg= translate((colourR.get(), colourG.get(), colourB.get())))
+setColour = Button(main, text="Set Colour", bg="white", fg="black", font=("Arial", 20))
 
-coloursList = [LedPwrB, colourR , colourG , colourB, colourFrame, colourBlackFrame, backLedBtn]
-coloursListCoord = [50,120 , 200,125 , 300,125 , 400,125 , 500,130 , 495,125 , 50,50]
+coloursList = [LedPwrB, colourR , colourG , colourB, colourFrame, colourBlackFrame, setColour, backLedBtn]
+coloursListCoord = [50,120 , 200,125 , 300,125 , 400,125 , 505,140 , 500,135 , 480,270 , 50,50]
 
 #----Effects------------------------------------------------------------------------------------------------------------
 effectColourBlackFrame = Frame(root, width=110, height=110, bg="#52565e")
