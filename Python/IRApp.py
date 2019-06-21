@@ -1,8 +1,8 @@
 from tkinter import *
 from tkinter.colorchooser import *
 import sys
-import time
 
+boolLoop = False
 sizeX = 800
 sizeY = 480
 
@@ -51,10 +51,48 @@ def Colours():
 def updateColour(s):
     colourFrame.configure(bg= translate((colourR.get(), colourG.get(), colourB.get())))
 
+def sleep():
+    pass
+
 #effects menu
 def Effects():
     forget(ledList)
     place(effectsList, effectsListCoord)
+
+def runEffect(li, eff):
+    r = li[eff][0]
+    g = li[eff][1]
+    b = li[eff][2]
+    global boolLoop
+    boolLoop = True
+    i = 3
+    while i < len(li[eff]):
+        red = li[eff][i%len(li[eff])]
+        green = li[eff][(i+1)%len(li[eff])]
+        blue = li[eff][(i+2)%len(li[eff])]
+        i+=3
+        while ( r != red or g != green or b != blue ):
+            if ( r < red ):
+                r += 1
+            if ( r > red ):
+                r -= 1
+
+            if ( g < green ):
+                g += 1
+            if ( g > green ):
+                g -= 1
+
+            if ( b < blue ):
+                b += 1
+            if ( b > blue ):
+                b -= 1
+
+            effectColourFrame.after(5,sleep())
+            effectColourFrame.configure(bg= translate((r,g,b)))
+            root.update()
+
+def pBtn():
+    PowerB.place(x=50, y=380)
 
 #main menu
 def menu():
@@ -137,11 +175,19 @@ coloursListCoord = [50,120 , 200,125 , 300,125 , 400,125 , 505,140 , 500,135 , 4
 #----Effects------------------------------------------------------------------------------------------------------------
 effectColourBlackFrame = Frame(root, width=110, height=110, bg="#52565e")
 effectColourFrame = Frame(root, width=100, height=100, bg="white")
+clrEffectList = [[80,0,80 , 0,255,255 , 80,0,80],[255,0,0 , 0,255,0 , 0,0,255 , 255,255,0 , 80,0,80 , 0,255,255]]
+Effect1 = Button(main, text="Effect1", bg="white", fg="black", font=("Arial", 20), command=lambda: runEffect(clrEffectList, 0))
+Effect2 = Button(main, text="Effect2", bg="white", fg="black", font=("Arial", 20), command=lambda: runEffect(clrEffectList, 1))
+Effect3 = Button(main, text="Effect3", bg="white", fg="black", font=("Arial", 20), command=lambda: runEffect(clrEffectList, 0))
+Effect4 = Button(main, text="Effect4", bg="white", fg="black", font=("Arial", 20), command=lambda: runEffect(clrEffectList, 0))
+Effect5 = Button(main, text="Effect5", bg="white", fg="black", font=("Arial", 20), command=lambda: runEffect(clrEffectList, 0))
+Effect6 = Button(main, text="Effect6", bg="white", fg="black", font=("Arial", 20), command=lambda: runEffect(clrEffectList, 0))
+setEffect = Button(main, text="Set Effect", bg="white", fg="black", font=("Arial", 20))
 
-effectsList = [LedPwrB, effectColourFrame, effectColourBlackFrame, backLedBtn]
-effectsListCoord = [50,120 , 500,130 , 495,125 , 50,50]
+effectsList = [LedPwrB, Effect1, Effect2, Effect3, Effect4, Effect5, Effect6, effectColourFrame, effectColourBlackFrame, setEffect, backLedBtn]
+effectsListCoord = [50,120 , 200,150 , 350,150 , 500,150 , 200,250 , 350,250 , 500,250 , 650,130 , 645,125 , 630,250 , 50,50]
 
 menu()
-PowerB.place(x=50, y=380)
+pBtn()
 
 root.mainloop()
