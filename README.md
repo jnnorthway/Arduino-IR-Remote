@@ -1,6 +1,8 @@
 # Arduino-IR-Remote
-Remote controller for sound system and rgb LED's.  
-Made for:  
+  
+## Remote controller for sound system and rgb LED's.  
+#### Made for:  
 Arduino uno / tft touch screen  
   
-Currently converting to Raspberry pi using python.
+## Currently converting to Raspberry pi using python.  
+Will be wired directly to LED strip, and interface with sound system via IR.
