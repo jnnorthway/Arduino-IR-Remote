@@ -34,4 +34,4 @@ while boolLoop:
         pi.set_PWM_dutycycle(pin[0], r)
         pi.set_PWM_dutycycle(pin[1], g)
         pi.set_PWM_dutycycle(pin[2], b)
-        time.sleep(2)
+        time.sleep(0.01)
