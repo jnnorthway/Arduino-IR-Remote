@@ -88,6 +88,7 @@ def LedPower():
         pi.set_PWM_dutycycle(pin[2], 0)
         global LedOn
         #thread1.end()
+        global LedOn
         LedOn = False
     else:
         global LedOn
