@@ -11,7 +11,7 @@ sizeY = 480
 LEDRED=0
 LEDGREEN=0
 LEDBLUE=0
-pin = [17,27,22]
+pin = [17,22,27]
 effectChosen = 0
 
 def exit():
@@ -135,7 +135,8 @@ def runEffect(li, eff):
     g = li[eff][1]
     b = li[eff][2]
     i = 3
-    global effectChosen = eff
+    global effectChosen
+    effectChosen = eff
     while i < len(li[eff]):
         red = li[eff][i%len(li[eff])]
         green = li[eff][(i+1)%len(li[eff])]
