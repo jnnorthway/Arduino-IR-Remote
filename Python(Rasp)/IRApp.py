@@ -82,16 +82,14 @@ def selectColour():
         pi.set_PWM_dutycycle(pin[2], LEDBLUE)
 
 def LedPower():
+    global LedOn
     if LedOn:
         pi.set_PWM_dutycycle(pin[0], 0)
         pi.set_PWM_dutycycle(pin[1], 0)
         pi.set_PWM_dutycycle(pin[2], 0)
-        global LedOn
         #thread1.end()
-        global LedOn
         LedOn = False
     else:
-        global LedOn
         LedOn = True
         selectColour()
 
