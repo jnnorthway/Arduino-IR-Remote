@@ -2,8 +2,11 @@ from tkinter import *
 from tkinter.colorchooser import *
 import sys
 import pigpio
+import ledEffect
+import threading
 pi = pigpio.pi()
 
+#global variables
 LedOn = False
 effectOn = False
 sizeX = 800
@@ -13,8 +16,13 @@ LEDGREEN=0
 LEDBLUE=0
 pin = [17,22,27]
 effectChosen = 0
+#thread1 = threading.Thread(target = ledEffect.runEffect, args = (effectChosen))
+
 
 def exit():
+    pi.set_PWM_dutycycle(pin[0], 0)
+    pi.set_PWM_dutycycle(pin[1], 0)
+    pi.set_PWM_dutycycle(pin[2], 0)
     sys.exit()
 
 #forget object placement
@@ -60,28 +68,30 @@ def updateColour(s):
     colourFrame.configure(bg= translate((colourR.get(), colourG.get(), colourB.get())))
 
 def selectColour():
-    global effectOn
-    effectOn = False
-    global LEDRED
-    LEDRED = colourR.get()
-    pi.set_PWM_dutycycle(pin[0], LEDRED)
-    global LEDGREEN
-    LEDGREEN = colourG.get()
-    pi.set_PWM_dutycycle(pin[1], LEDGREEN)
-    global LEDBLUE
-    LEDBLUE = colourB.get()
-    pi.set_PWM_dutycycle(pin[2], LEDBLUE)
+    if LedOn:
+        global effectOn
+        effectOn = False
+        global LEDRED
+        LEDRED = colourR.get()
+        pi.set_PWM_dutycycle(pin[0], LEDRED)
+        global LEDGREEN
+        LEDGREEN = colourG.get()
+        pi.set_PWM_dutycycle(pin[1], LEDGREEN)
+        global LEDBLUE
+        LEDBLUE = colourB.get()
+        pi.set_PWM_dutycycle(pin[2], LEDBLUE)
 
 def LedPower():
-    if ledOn:
+    if LedOn:
         pi.set_PWM_dutycycle(pin[0], 0)
         pi.set_PWM_dutycycle(pin[1], 0)
         pi.set_PWM_dutycycle(pin[2], 0)
         global LedOn
-        ledOn = False
+        #thread1.end()
+        LedOn = False
     else:
         global LedOn
-        ledOn = True
+        LedOn = True
         selectColour()
 
 def sleep():
@@ -92,43 +102,9 @@ def Effects():
     forget(ledList)
     place(effectsList, effectsListCoord)
 
-def doEffect(self):
-    eff = effectChosen
-    r = li[eff][0]
-    g = li[eff][1]
-    b = li[eff][2]
-    i = 3
-
-    if effectOn and LedOn:
-        red = li[eff][i%len(li[eff])]
-        green = li[eff][(i+1)%len(li[eff])]
-        blue = li[eff][(i+2)%len(li[eff])]
-        i+=3
-        while ( r != red or g != green or b != blue ):
-            if ( r < red ):
-                r += 1
-            if ( r > red ):
-                r -= 1
-
-            if ( g < green ):
-                g += 1
-            if ( g > green ):
-                g -= 1
-
-            if ( b < blue ):
-                b += 1
-            if ( b > blue ):
-                b -= 1
-
-            pi.set_PWM_dutycycle(pin[0], r)
-            pi.set_PWM_dutycycle(pin[1], g)
-            pi.set_PWM_dutycycle(pin[2], b)
-            root.update()
-    self.after(100, self.add_one)
-
 def selectEffect():
     effectOn = True
-    doEffect()
+    #thread1.start()
 
 def runEffect(li, eff):
     r = li[eff][0]
