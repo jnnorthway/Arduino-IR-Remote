@@ -5,7 +5,7 @@ pin = [17,22,27]
 eff = 0
 boolLoop = True
 li = [[80,0,80 , 0,255,255 , 80,0,80],[255,0,0 , 0,255,0 , 0,0,255 , 255,255,0 , 80,0,80 , 0,255,255]]
-
+i = 0
 while boolLoop:
     red = li[eff][i%len(li[eff])]
     green = li[eff][(i+1)%len(li[eff])]
