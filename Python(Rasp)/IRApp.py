@@ -199,7 +199,7 @@ samsungList = [SamPwrB, SamSource, SamVolumeUp, SamVolumeDown, SamVolumeMute, Sa
 samsungListCoord = [50,120 , 480,75 , 240,60, 240,340 , 240,200 , 490,200 , 490,340 , 50,50]
 
 #----LED------------------------------------------------------------------------------------------------------------
-LedPwrB = Button(image=pwr2)
+LedPwrB = Button(image=pwr2, command=LedPower)
 LedColours = Button(main, text="Colours", bg="white", fg="black", font=("Arial", 20), command=Colours)
 LedEffects = Button(main, text="Effects", bg="white", fg="black", font=("Arial", 20), command=Effects)
 
