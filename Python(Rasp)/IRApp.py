@@ -1,10 +1,18 @@
 from tkinter import *
 from tkinter.colorchooser import *
 import sys
+import pigpio
+pi = pigpio.pi()
 
-boolLoop = False
+LedOn = False
+effectOn = False
 sizeX = 800
 sizeY = 480
+LEDRED=0
+LEDGREEN=0
+LEDBLUE=0
+pin = [17,27,22]
+effectChosen = 0
 
 def exit():
     sys.exit()
@@ -51,6 +59,31 @@ def Colours():
 def updateColour(s):
     colourFrame.configure(bg= translate((colourR.get(), colourG.get(), colourB.get())))
 
+def selectColour():
+    global effectOn
+    effectOn = False
+    global LEDRED
+    LEDRED = colourR.get()
+    pi.set_PWM_dutycycle(pin[0], LEDRED)
+    global LEDGREEN
+    LEDGREEN = colourG.get()
+    pi.set_PWM_dutycycle(pin[1], LEDGREEN)
+    global LEDBLUE
+    LEDBLUE = colourB.get()
+    pi.set_PWM_dutycycle(pin[2], LEDBLUE)
+
+def LedPower():
+    if ledOn:
+        pi.set_PWM_dutycycle(pin[0], 0)
+        pi.set_PWM_dutycycle(pin[1], 0)
+        pi.set_PWM_dutycycle(pin[2], 0)
+        global LedOn
+        ledOn = False
+    else:
+        global LedOn
+        ledOn = True
+        selectColour()
+
 def sleep():
     pass
 
@@ -59,13 +92,50 @@ def Effects():
     forget(ledList)
     place(effectsList, effectsListCoord)
 
+def doEffect(self):
+    eff = effectChosen
+    r = li[eff][0]
+    g = li[eff][1]
+    b = li[eff][2]
+    i = 3
+
+    if effectOn and LedOn:
+        red = li[eff][i%len(li[eff])]
+        green = li[eff][(i+1)%len(li[eff])]
+        blue = li[eff][(i+2)%len(li[eff])]
+        i+=3
+        while ( r != red or g != green or b != blue ):
+            if ( r < red ):
+                r += 1
+            if ( r > red ):
+                r -= 1
+
+            if ( g < green ):
+                g += 1
+            if ( g > green ):
+                g -= 1
+
+            if ( b < blue ):
+                b += 1
+            if ( b > blue ):
+                b -= 1
+
+            pi.set_PWM_dutycycle(pin[0], r)
+            pi.set_PWM_dutycycle(pin[1], g)
+            pi.set_PWM_dutycycle(pin[2], b)
+            root.update()
+    self.after(100, self.add_one)
+
+def selectEffect():
+    effectOn = True
+    doEffect()
+
 def runEffect(li, eff):
     r = li[eff][0]
     g = li[eff][1]
     b = li[eff][2]
-    global boolLoop
-    boolLoop = True
     i = 3
+    global effectChosen = eff
     while i < len(li[eff]):
         red = li[eff][i%len(li[eff])]
         green = li[eff][(i+1)%len(li[eff])]
@@ -166,9 +236,11 @@ colourG = Scale(main, bg="#47ce35", fg="white", from_=255, to=0, showvalue=0, fo
 colourG.set(255)
 colourB = Scale(main, bg="#3553ce", fg="white", from_=255, to=0, showvalue=0, font=("Arial", 12), length=200, width=50, command=updateColour)
 colourB.set(255)
+brightness = Scale(main, bg="black", fg="white", from_=1, to=256, showvalue=0, font=("Arial", 12), orient=HORIZONTAL, length=200, width=30)
+brightness.set(255)
 colourBlackFrame = Frame(root, width=110, height=110, bg="#52565e")
 colourFrame = Frame(root, width=100, height=100, bg= translate((colourR.get(), colourG.get(), colourB.get())))
-setColour = Button(main, text="Set Colour", bg="white", fg="black", font=("Arial", 20))
+setColour = Button(main, text="Set Colour", bg="white", fg="black", font=("Arial", 20), command=selectColour)
 
 coloursList = [LedPwrB, colourR , colourG , colourB, colourFrame, colourBlackFrame, setColour, backLedBtn]
 coloursListCoord = [50,120 , 200,125 , 300,125 , 400,125 , 505,140 , 500,135 , 480,270 , 50,50]
@@ -183,7 +255,7 @@ Effect3 = Button(main, text="Effect3", bg="white", fg="black", font=("Arial", 20
 Effect4 = Button(main, text="Effect4", bg="white", fg="black", font=("Arial", 20), command=lambda: runEffect(clrEffectList, 0))
 Effect5 = Button(main, text="Effect5", bg="white", fg="black", font=("Arial", 20), command=lambda: runEffect(clrEffectList, 0))
 Effect6 = Button(main, text="Effect6", bg="white", fg="black", font=("Arial", 20), command=lambda: runEffect(clrEffectList, 0))
-setEffect = Button(main, text="Set Effect", bg="white", fg="black", font=("Arial", 20))
+setEffect = Button(main, text="Set Effect", bg="white", fg="black", font=("Arial", 20), command=selectEffect)
 
 effectsList = [LedPwrB, Effect1, Effect2, Effect3, Effect4, Effect5, Effect6, effectColourFrame, effectColourBlackFrame, setEffect, backLedBtn]
 effectsListCoord = [50,120 , 200,150 , 350,150 , 500,150 , 200,250 , 350,250 , 500,250 , 650,130 , 645,125 , 630,250 , 50,50]

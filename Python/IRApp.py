@@ -2,9 +2,9 @@ from tkinter import *
 from tkinter.colorchooser import *
 import sys
 
-boolLoop = False
 sizeX = 800
 sizeY = 480
+MAX_LIGHT = 256
 
 def exit():
     sys.exit()
@@ -49,7 +49,12 @@ def Colours():
 
 #update frame to show colour
 def updateColour(s):
-    colourFrame.configure(bg= translate((colourR.get(), colourG.get(), colourB.get())))
+    colourFrame.configure(bg= translate((colourR.get()%MAX_LIGHT, colourG.get()%MAX_LIGHT, colourB.get()%MAX_LIGHT)))
+
+def updateBrightness(s):
+    global MAX_LIGHT
+    MAX_LIGHT = brightness.get()
+    updateColour(s)
 
 def sleep():
     pass
@@ -165,12 +170,14 @@ colourG = Scale(main, bg="#47ce35", fg="white", from_=255, to=0, showvalue=0, fo
 colourG.set(255)
 colourB = Scale(main, bg="#3553ce", fg="white", from_=255, to=0, showvalue=0, font=("Arial", 12), length=200, width=50, command=updateColour)
 colourB.set(255)
+brightness = Scale(main, bg="black", fg="white", from_=1, to=256, showvalue=0, font=("Arial", 12), orient=HORIZONTAL, length=200, width=30, command=updateBrightness)
+brightness.set(256)
 colourBlackFrame = Frame(root, width=110, height=110, bg="#52565e")
 colourFrame = Frame(root, width=100, height=100, bg= translate((colourR.get(), colourG.get(), colourB.get())))
 setColour = Button(main, text="Set Colour", bg="white", fg="black", font=("Arial", 20))
 
-coloursList = [LedPwrB, colourR , colourG , colourB, colourFrame, colourBlackFrame, setColour, backLedBtn]
-coloursListCoord = [50,120 , 200,125 , 300,125 , 400,125 , 505,140 , 500,135 , 480,270 , 50,50]
+coloursList = [LedPwrB, colourR , colourG , colourB, brightness, colourFrame, colourBlackFrame, setColour, backLedBtn]
+coloursListCoord = [50,120 , 200,125 , 300,125 , 400,125 , 200,350 , 505,140 , 500,135 , 480,270 , 50,50]
 
 #----Effects------------------------------------------------------------------------------------------------------------
 effectColourBlackFrame = Frame(root, width=110, height=110, bg="#52565e")
@@ -185,7 +192,7 @@ Effect6 = Button(main, text="Effect6", bg="white", fg="black", font=("Arial", 20
 setEffect = Button(main, text="Set Effect", bg="white", fg="black", font=("Arial", 20))
 
 effectsList = [LedPwrB, Effect1, Effect2, Effect3, Effect4, Effect5, Effect6, effectColourFrame, effectColourBlackFrame, setEffect, backLedBtn]
-effectsListCoord = [50,120 , 200,150 , 350,150 , 500,150 , 200,250 , 350,250 , 500,250 , 650,130 , 645,125 , 630,250 , 50,50]
+effectsListCoord = [50,120 , 180,150 , 330,150 , 480,150 , 180,250 , 330,250 , 480,250 , 630,130 , 625,125 , 610,250 , 50,50]
 
 menu()
 pBtn()
