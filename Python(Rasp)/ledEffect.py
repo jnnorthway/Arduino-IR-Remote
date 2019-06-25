@@ -1,4 +1,5 @@
 import pigpio
+import time
 pi = pigpio.pi()
 
 pin = [17,22,27]
@@ -33,3 +34,4 @@ while boolLoop:
         pi.set_PWM_dutycycle(pin[0], r)
         pi.set_PWM_dutycycle(pin[1], g)
         pi.set_PWM_dutycycle(pin[2], b)
+        time.sleep(2)
