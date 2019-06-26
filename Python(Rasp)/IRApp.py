@@ -3,6 +3,7 @@ from tkinter.colorchooser import *
 import sys
 import pigpio
 import subprocess
+import threading
 pi = pigpio.pi()
 
 #global variables
@@ -86,7 +87,7 @@ def LedPower():
         pi.set_PWM_dutycycle(pin[0], 0)
         pi.set_PWM_dutycycle(pin[1], 0)
         pi.set_PWM_dutycycle(pin[2], 0)
-        subprocess.call(["pkill", "-f", "ledEffect.py"])
+        subprocess.call(["sudo", "pkill", "-f", "ledEffect.py"])
         LedOn = False
     else:
         LedOn = True
@@ -100,10 +101,14 @@ def Effects():
     forget(ledList)
     place(effectsList, effectsListCoord)
 
+def callEffect():
+    subprocess.call(["sudo", "python3", "ledEffect.py", str(effectChosen)])
+
 def selectEffect():
     if LedOn:
         effectOn = True
-        subprocess.call(["sudo", "python3", "ledEffect.py", str(effectChosen), "&"])
+        t1 = threading.Thread(target=callEffect)
+        t1.start()
 
 def runEffect(li, eff):
     r = li[eff][0]
@@ -236,6 +241,7 @@ setEffect = Button(main, text="Set Effect", bg="white", fg="black", font=("Arial
 effectsList = [LedPwrB, Effect1, Effect2, Effect3, Effect4, Effect5, Effect6, effectColourFrame, effectColourBlackFrame, setEffect, backLedBtn]
 effectsListCoord = [50,120 , 200,150 , 350,150 , 500,150 , 200,250 , 350,250 , 500,250 , 650,130 , 645,125 , 630,250 , 50,50]
 
+subprocess.call(["sudo", "pigpiod"])
 menu()
 pBtn()
 
