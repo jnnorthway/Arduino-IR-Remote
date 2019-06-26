@@ -2,7 +2,6 @@ from tkinter import *
 from tkinter.colorchooser import *
 import sys
 import pigpio
-import ledEffect
 import subprocess
 pi = pigpio.pi()
 
