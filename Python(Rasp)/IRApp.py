@@ -102,8 +102,9 @@ def Effects():
     place(effectsList, effectsListCoord)
 
 def selectEffect():
-    effectOn = True
-    subprocess.call(["sudo", "python3", "ledEffect.py", str(effectChosen)])
+    if LedOn:
+        effectOn = True
+        subprocess.call(["sudo", "python3", "ledEffect.py", str(effectChosen)])
 
 def runEffect(li, eff):
     r = li[eff][0]
