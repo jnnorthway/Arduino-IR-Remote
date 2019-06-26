@@ -103,7 +103,7 @@ def Effects():
     place(effectsList, effectsListCoord)
 
 def callEffect():
-    subprocess.call(["sudo", "python3", "ledEffect.py", str(effectChosen)])
+    subprocess.call(["sudo", "python3", "/home/pi/Desktop/github/Desktop-Remote/Python(Rasp)/ledEffect.py", str(effectChosen)])
 
 def selectEffect():
     if LedOn:
