@@ -3,7 +3,7 @@ from tkinter.colorchooser import *
 import sys
 import pigpio
 import ledEffect
-import threading
+import subprocess
 pi = pigpio.pi()
 
 #global variables
@@ -16,7 +16,7 @@ LEDGREEN=0
 LEDBLUE=0
 pin = [17,22,27]
 effectChosen = 0
-#thread1 = threading.Thread(target = ledEffect.runEffect, args = (effectChosen))
+
 
 
 def exit():
@@ -87,7 +87,7 @@ def LedPower():
         pi.set_PWM_dutycycle(pin[0], 0)
         pi.set_PWM_dutycycle(pin[1], 0)
         pi.set_PWM_dutycycle(pin[2], 0)
-        #thread1.end()
+        subprocess.call(["pkill", "-f", "ledEffect.py"])
         LedOn = False
     else:
         LedOn = True
@@ -103,7 +103,7 @@ def Effects():
 
 def selectEffect():
     effectOn = True
-    #thread1.start()
+    subprocess.call(["sudo", "python3", "ledEffect.py", str(effectChosen)])
 
 def runEffect(li, eff):
     r = li[eff][0]
