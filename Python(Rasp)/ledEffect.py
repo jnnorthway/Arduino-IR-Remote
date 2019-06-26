@@ -39,4 +39,4 @@ def runEffect(eff):
             pi.set_PWM_dutycycle(pin[2], b)
             time.sleep(0.01)
 
-runEffect(sys.argv[2])
+runEffect(int(sys.argv[1]))
