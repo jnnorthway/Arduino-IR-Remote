@@ -69,6 +69,7 @@ def updateColour(s):
 
 def selectColour():
     if LedOn:
+        subprocess.call(["sudo", "pkill", "-f", "ledEffect.py"])
         global effectOn
         effectOn = False
         global LEDRED
@@ -84,10 +85,10 @@ def selectColour():
 def LedPower():
     global LedOn
     if LedOn:
+        subprocess.call(["sudo", "pkill", "-f", "ledEffect.py"])
         pi.set_PWM_dutycycle(pin[0], 0)
         pi.set_PWM_dutycycle(pin[1], 0)
         pi.set_PWM_dutycycle(pin[2], 0)
-        subprocess.call(["sudo", "pkill", "-f", "ledEffect.py"])
         LedOn = False
     else:
         LedOn = True
