@@ -107,6 +107,7 @@ def callEffect():
 
 def selectEffect():
     if LedOn:
+        subprocess.call(["sudo", "pkill", "-f", "ledEffect.py"])
         effectOn = True
         t1 = threading.Thread(target=callEffect)
         t1.start()
@@ -242,7 +243,6 @@ setEffect = Button(main, text="Set Effect", bg="white", fg="black", font=("Arial
 effectsList = [LedPwrB, Effect1, Effect2, Effect3, Effect4, Effect5, Effect6, effectColourFrame, effectColourBlackFrame, setEffect, backLedBtn]
 effectsListCoord = [50,120 , 200,150 , 350,150 , 500,150 , 200,250 , 350,250 , 500,250 , 650,130 , 645,125 , 630,250 , 50,50]
 
-subprocess.call(["sudo", "pigpiod"])
 menu()
 pBtn()
 
