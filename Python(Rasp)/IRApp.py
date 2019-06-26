@@ -160,7 +160,7 @@ root.configure(bg="black")
 root.attributes("-fullscreen", True)
 title = Frame(root).place(width = sizeX, height = 150, x = 0, y = 0)
 version = Frame(root).place(width = sizeX, height = sizeY, x = 0, y = 0)
-main = Frame(root).place(width = sizeX, height = 650, x = 0, y = 200)
+main = Frame(root).configure(cursor='none').place(width = sizeX, height = 650, x = 0, y = 200)
 bg1 = PhotoImage(file="images/bg1.png")
 background_label = Label(main, image=bg1)
 pwr = PhotoImage(file="images/pwrBtn.png")
@@ -175,7 +175,7 @@ rgbPic = Label(root, image=rgbImg)
 
 #Labels
 title = Label(title, text="IR Controller", bg="#ff0c85", fg="#ffc9e3", font=("Arial", 44))
-version = Label(version, text="v1.1", bg="#ff0c85", fg="#ffc9e3", font=("Arial", 20))
+version = Label(version, text="v2.0", bg="#ff0c85", fg="#ffc9e3", font=("Arial", 20))
 
 #----Menu------------------------------------------------------------------------------------------------------------
 LedB = Button(main, text="LED", bg="white", fg="black", font=("Arial", 20), command=Led)
