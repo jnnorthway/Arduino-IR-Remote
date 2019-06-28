@@ -3,6 +3,7 @@ import time
 import sys
 pi = pigpio.pi()
 
+li
 pin = [17,22,27]
 f=open("/home/pi/Desktop/github/Desktop-Remote/Python(Rasp)/Effects.txt", "r")
 if f.mode == 'r':
