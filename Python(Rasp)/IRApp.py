@@ -155,14 +155,25 @@ def menu():
     background_label.place(x=0, y=0, relwidth=1, relheight=1)
     place(menuList, menuListCoord)
 
+def tick():
+    global time1
+    time2 = time.strftime('%H:%M:%S')
+    if time2 != time1:
+        time1 = time2
+        clock.config(text=time2)
+    clock.after(200, tick)
+
 root = Tk()
 root.geometry(str(sizeX) + "x" + str(sizeY))
 root.configure(bg="black")
 root.attributes("-fullscreen", True)
 root.config(cursor="none")
+
 title = Frame(root).place(width = sizeX, height = 150, x = 0, y = 0)
 version = Frame(root).place(width = sizeX, height = sizeY, x = 0, y = 0)
+time = Frame(root).place(width = sizeX, height = sizeY, x = 0, y = 0)
 main = Frame(root)
+
 main.place(width = sizeX, height = sizeY, x = 0, y = 0)
 bg1 = PhotoImage(file="/home/pi/Desktop/github/Desktop-Remote/Python(Rasp)/images/bg1.png")
 background_label = Label(main, image=bg1)
@@ -177,8 +188,9 @@ rgbImg = PhotoImage(file="/home/pi/Desktop/github/Desktop-Remote/Python(Rasp)/im
 rgbPic = Label(root, image=rgbImg)
 
 #Labels
-title = Label(title, text="IR Controller", bg="#ff0c85", fg="#ffc9e3", font=("Arial", 44))
+title = Label(title, text="Desktop Remote", bg="#ff0c85", fg="#ffc9e3", font=("Arial", 44))
 version = Label(version, text="v2.0", bg="#ff0c85", fg="#ffc9e3", font=("Arial", 20))
+clock = Label(time, bg="#ff0c85", fg="#ffc9e3", font=("Arial", 20))
 
 #----Menu------------------------------------------------------------------------------------------------------------
 LedB = Button(main, text="LED", bg="white", fg="black", font=("Arial", 20), command=Led)
@@ -188,8 +200,8 @@ PowerB = Button(image=pwr, command=exit)
 PowerB["bg"] = "black"
 PowerB["border"] = "0"
 
-menuList = [title, version, LedB, SamsungB]
-menuListCoord = [175,0,450 , 720,440,80 , 100,240,200 , 500,240,200]
+menuList = [title, version, LedB, SamsungB, clock]
+menuListCoord = [175,0,450 , 720,440,80 , 100,240,200 , 500,240,200 , 720,0,80]
 
 #----Universal------------------------------------------------------------------------------------------------------------
 backBtn = Button(main, text="BACK", bg="black", fg="white", font=("Arial", 20), command=menu)
@@ -255,5 +267,5 @@ effectsListCoord = [50,120 , 200,150 , 350,150 , 500,150 , 200,250 , 350,250 , 5
 
 menu()
 pBtn()
-
+tick()
 root.mainloop()
