@@ -4,7 +4,7 @@ import sys
 pi = pigpio.pi()
 
 pin = [17,22,27]
-f=open("guru99.txt", "r")
+f=open("Effects.txt", "r")
 if f.mode == 'r':
     f1.readlines()
     count = 0
