@@ -6,7 +6,7 @@ pi = pigpio.pi()
 pin = [17,22,27]
 f=open("/home/pi/Desktop/github/Desktop-Remote/Python(Rasp)/Effects.txt", "r")
 if f.mode == 'r':
-    f1.readlines()
+    f1 = f.readlines()
     count = 0
     for x in f1:
         j=0
