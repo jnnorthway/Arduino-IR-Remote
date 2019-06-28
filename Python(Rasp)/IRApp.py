@@ -186,7 +186,7 @@ rgbImg = PhotoImage(file="/home/pi/Desktop/github/Desktop-Remote/Python(Rasp)/im
 rgbPic = Label(root, image=rgbImg)
 
 #Labels
-time1 = ''
+time1 = StringVar()
 title = Label(title, text="Desktop Remote", bg="#ff0c85", fg="#ffc9e3", font=("Arial", 44))
 version = Label(version, text="v2.0", bg="#ff0c85", fg="#ffc9e3", font=("Arial", 20))
 clock = Label(main, textvariable=time1, bg="#ff0c85", fg="#ffc9e3", font=("Arial", 20))
