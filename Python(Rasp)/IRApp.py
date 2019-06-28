@@ -192,7 +192,7 @@ rgbPic = Label(root, image=rgbImg)
 # time1.set(time.strftime("%H:%M:%S"))
 title = Label(title, text="Desktop Remote", bg="#ff0c85", fg="#ffc9e3", font=("Arial", 44))
 version = Label(version, text="v2.0", bg="#ff0c85", fg="#ffc9e3", font=("Arial", 20))
-clock = Label(main, textvariable=time1, bg="#ff0c85", fg="#ffc9e3", font=("Arial", 20))
+# clock = Label(main, textvariable=time1, bg="#ff0c85", fg="#ffc9e3", font=("Arial", 20))
 
 #----Menu------------------------------------------------------------------------------------------------------------
 LedB = Button(main, text="LED", bg="white", fg="black", font=("Arial", 20), command=Led)
