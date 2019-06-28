@@ -6,6 +6,7 @@ import pigpio
 import subprocess
 import threading
 import time
+
 pi = pigpio.pi()
 
 #global variables
@@ -158,7 +159,7 @@ def menu():
 
 def tick():
     global time1
-    time1 = time.strftime('%H:%M:%S')
+    time1 = time.asctime([t])
     clock.configure(text=time1)
     clock.after(500, tick)
 
