@@ -157,9 +157,9 @@ def menu():
     background_label.place(x=0, y=0, relwidth=1, relheight=1)
     place(menuList, menuListCoord)
 
-def tick():
-    time1.set(time.strftime("%H:%M:%S"))
-    clock.after(500, tick)
+# def tick():
+#     time1.set(time.strftime("%H:%M:%S"))
+#     clock.after(500, tick)
 
 root = Tk()
 root.geometry(str(sizeX) + "x" + str(sizeY))
@@ -169,7 +169,7 @@ root.config(cursor="none")
 
 title = Frame(root).place(width = sizeX, height = 150, x = 0, y = 0)
 version = Frame(root).place(width = sizeX, height = sizeY, x = 0, y = 0)
-time = Frame(root).place(width = sizeX, height = sizeY, x = 0, y = 0)
+# time = Frame(root).place(width = sizeX, height = sizeY, x = 0, y = 0)
 main = Frame(root)
 
 main.place(width = sizeX, height = sizeY, x = 0, y = 0)
@@ -188,8 +188,8 @@ rgbPic = Label(root, image=rgbImg)
 root.after(1000, tick)
 
 #Labels
-time1 = StringVar()
-time1.set(time.strftime("%H:%M:%S"))
+# time1 = StringVar()
+# time1.set(time.strftime("%H:%M:%S"))
 title = Label(title, text="Desktop Remote", bg="#ff0c85", fg="#ffc9e3", font=("Arial", 44))
 version = Label(version, text="v2.0", bg="#ff0c85", fg="#ffc9e3", font=("Arial", 20))
 clock = Label(main, textvariable=time1, bg="#ff0c85", fg="#ffc9e3", font=("Arial", 20))
@@ -202,8 +202,8 @@ PowerB = Button(image=pwr, command=exit)
 PowerB["bg"] = "black"
 PowerB["border"] = "0"
 
-menuList = [title, version, LedB, SamsungB, clock]
-menuListCoord = [175,0,450 , 720,440,80 , 100,240,200 , 500,240,200 , 720,0,80]
+menuList = [title, version, LedB, SamsungB]
+menuListCoord = [175,0,450 , 720,440,80 , 100,240,200 , 500,240,200]
 
 #----Universal------------------------------------------------------------------------------------------------------------
 backBtn = Button(main, text="BACK", bg="black", fg="white", font=("Arial", 20), command=menu)
