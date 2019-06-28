@@ -185,8 +185,11 @@ minus = PhotoImage(file="/home/pi/Desktop/github/Desktop-Remote/Python(Rasp)/ima
 rgbImg = PhotoImage(file="/home/pi/Desktop/github/Desktop-Remote/Python(Rasp)/images/rgbImg2.png")
 rgbPic = Label(root, image=rgbImg)
 
+root.after(1000, tick)
+
 #Labels
 time1 = StringVar()
+time1.set(time.strftime("%H:%M:%S"))
 title = Label(title, text="Desktop Remote", bg="#ff0c85", fg="#ffc9e3", font=("Arial", 44))
 version = Label(version, text="v2.0", bg="#ff0c85", fg="#ffc9e3", font=("Arial", 20))
 clock = Label(main, textvariable=time1, bg="#ff0c85", fg="#ffc9e3", font=("Arial", 20))
@@ -266,5 +269,4 @@ effectsListCoord = [50,120 , 200,150 , 350,150 , 500,150 , 200,250 , 350,250 , 5
 
 menu()
 pBtn()
-tick()
 root.mainloop()
