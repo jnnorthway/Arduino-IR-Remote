@@ -185,7 +185,7 @@ minus = PhotoImage(file="/home/pi/Desktop/github/Desktop-Remote/Python(Rasp)/ima
 rgbImg = PhotoImage(file="/home/pi/Desktop/github/Desktop-Remote/Python(Rasp)/images/rgbImg2.png")
 rgbPic = Label(root, image=rgbImg)
 
-root.after(1000, tick)
+# root.after(1000, tick)
 
 #Labels
 # time1 = StringVar()
