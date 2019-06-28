@@ -234,13 +234,20 @@ coloursListCoord = [50,120 , 200,125 , 300,125 , 400,125 , 505,140 , 500,135 , 4
 #----Effects------------------------------------------------------------------------------------------------------------
 effectColourBlackFrame = Frame(root, width=110, height=110, bg="#52565e")
 effectColourFrame = Frame(root, width=100, height=100, bg="white")
-clrEffectList = [[80,0,80 , 0,255,255 , 80,0,80],[255,0,0 , 0,255,0 , 0,0,255 , 255,255,0 , 80,0,80 , 0,255,255]]
+clrEffectList = [
+[255,0,255,0,255,255,255,0,255]
+,[255,0,0,255,128,0,255,255,0,128,255,0,0,255,0,0,255,255,0,128,255,0,0,255,128,0,255,255,0,255,255,0,255,255,0,128,255,0,0]
+,[255,0,255,0,0,0,255,0,255]
+,[128,0,255,0,0,0,128,0,255]
+,[0,255,255,0,0,0,0,255,255]
+,[255,0,255,128,0,255,255,0,255]
+]
 Effect1 = Button(main, text="Effect1", bg="white", fg="black", font=("Arial", 20), command=lambda: runEffect(clrEffectList, 0))
 Effect2 = Button(main, text="Effect2", bg="white", fg="black", font=("Arial", 20), command=lambda: runEffect(clrEffectList, 1))
-Effect3 = Button(main, text="Effect3", bg="white", fg="black", font=("Arial", 20), command=lambda: runEffect(clrEffectList, 0))
-Effect4 = Button(main, text="Effect4", bg="white", fg="black", font=("Arial", 20), command=lambda: runEffect(clrEffectList, 0))
-Effect5 = Button(main, text="Effect5", bg="white", fg="black", font=("Arial", 20), command=lambda: runEffect(clrEffectList, 0))
-Effect6 = Button(main, text="Effect6", bg="white", fg="black", font=("Arial", 20), command=lambda: runEffect(clrEffectList, 0))
+Effect3 = Button(main, text="Effect3", bg="white", fg="black", font=("Arial", 20), command=lambda: runEffect(clrEffectList, 2))
+Effect4 = Button(main, text="Effect4", bg="white", fg="black", font=("Arial", 20), command=lambda: runEffect(clrEffectList, 3))
+Effect5 = Button(main, text="Effect5", bg="white", fg="black", font=("Arial", 20), command=lambda: runEffect(clrEffectList, 4))
+Effect6 = Button(main, text="Effect6", bg="white", fg="black", font=("Arial", 20), command=lambda: runEffect(clrEffectList, 5))
 setEffect = Button(main, text="Set Effect", bg="white", fg="black", font=("Arial", 20), command=selectEffect)
 
 effectsList = [LedPwrB, Effect1, Effect2, Effect3, Effect4, Effect5, Effect6, effectColourFrame, effectColourBlackFrame, setEffect, backLedBtn]
