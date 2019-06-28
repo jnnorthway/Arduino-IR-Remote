@@ -157,9 +157,9 @@ def menu():
 
 def tick():
     global time1
-    time1 = MyDateTime.ctime()
+    time1 = time.strftime('%H:%M:%S')
     clock.configure(text=time1)
-    clock.after(200, tick)
+    clock.after(500, tick)
 
 root = Tk()
 root.geometry(str(sizeX) + "x" + str(sizeY))
