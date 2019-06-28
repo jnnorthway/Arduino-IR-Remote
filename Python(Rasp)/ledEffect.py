@@ -3,22 +3,28 @@ import time
 import sys
 pi = pigpio.pi()
 
-li=[[],[],[],[],[],[]]
 pin = [17,22,27]
-f=open("/home/pi/Desktop/github/Desktop-Remote/Python(Rasp)/Effects.txt", "r")
-if f.mode == 'r':
-    f1 = f.readlines()
-    count = 0
-    for x in f1:
-        j=0
-        for element in x:
-            if element != ',':
-                li[count][j] += element
-            else:
-                j+=1
-        count += 1
+# f=open("/home/pi/Desktop/github/Desktop-Remote/Python(Rasp)/Effects.txt", "r")
+# if f.mode == 'r':
+#     f1 = f.readlines()
+#     count = 0
+#     for x in f1:
+#         j=0
+#         for element in x:
+#             if element != ',':
+#                 li[count][j] += element
+#             else:
+#                 j+=1
+#         count += 1
 
-#li = [[80,0,80 , 0,255,255 , 80,0,80],[255,0,0 , 0,255,0 , 0,0,255 , 255,255,0 , 80,0,80 , 0,255,255]]
+li = [
+[255,0,255,0,255,255,255,0,255]
+,[255,0,0,255,128,0,255,255,0,128,255,0,0,255,0,0,255,255,0,128,255,0,0,255,128,0,255,255,0,255,255,0,255,255,0,128,255,0,0]
+,[255,0,255,0,0,0,255,0,255]
+,[128,0,255,0,0,0,128,0,255]
+,[0,255,255,0,0,0,0,255,255]
+,[255,0,255,128,0,255,255,0,255]
+]
 
 def runEffect(eff):
     i = 0
