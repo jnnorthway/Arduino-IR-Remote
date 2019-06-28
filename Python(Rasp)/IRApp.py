@@ -5,6 +5,7 @@ import sys
 import pigpio
 import subprocess
 import threading
+import time
 pi = pigpio.pi()
 
 #global variables
