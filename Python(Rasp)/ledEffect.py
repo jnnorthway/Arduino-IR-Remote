@@ -4,18 +4,20 @@ import sys
 pi = pigpio.pi()
 
 pin = [17,22,27]
-# f=open("/home/pi/Desktop/github/Desktop-Remote/Python(Rasp)/Effects.txt", "r")
-# if f.mode == 'r':
-#     f1 = f.readlines()
-#     count = 0
-#     for x in f1:
-#         j=0
-#         for element in x:
-#             if element != ',':
-#                 li[count][j] += element
-#             else:
-#                 j+=1
-#         count += 1
+#
+# file=open("/home/pi/Desktop/github/Desktop-Remote/Python(Rasp)/Effects.txt", "r")
+# f1 = file.readlines()
+# file.close()
+#
+# count = 0
+# for x in f1:
+#     j=0
+#     for element in x:
+#         if element != ',':
+#             li[count][j] += element
+#         else:
+#             j+=1
+#     count += 1
 
 li = [
 [255,0,255,0,255,255,255,0,255]

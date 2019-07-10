@@ -203,7 +203,7 @@ PowerB["bg"] = "black"
 PowerB["border"] = "0"
 
 menuList = [title, version, LedB, SamsungB]
-menuListCoord = [175,0,450 , 720,440,80 , 100,240,200 , 500,240,200]
+menuListCoord = [175,0,500 , 720,440,80 , 100,240,200 , 500,240,200]
 
 #----Universal------------------------------------------------------------------------------------------------------------
 backBtn = Button(main, text="BACK", bg="black", fg="white", font=("Arial", 20), command=menu)
